@@ -7,7 +7,7 @@
   "files": [
     "lib"
   ],
-  "scripts": { },
+  "scripts": {},
   "author": "Nick Bolles <me@nickbolles.com>",
   "license": "MIT",
   "peerDependencies": {

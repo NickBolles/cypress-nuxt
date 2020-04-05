@@ -2,6 +2,4 @@ interface Options {
     transform(webpackConfig: any): Promise<any> | any;
 }
 
-declare function cypressNuxt(opts?: Options): Promise<any>;
-
-export = cypressNuxt;
+export function plugin(opts?: Options): Promise<any>;

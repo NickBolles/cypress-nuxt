@@ -1,7 +1,7 @@
 {
   "name": "cypress-nuxt",
   "displayName": "Cypress Nuxt",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Cypress plugin for nuxt.js",
   "repository": {
     "type": "git",

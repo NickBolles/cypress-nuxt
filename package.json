@@ -1,7 +1,12 @@
 {
   "name": "cypress-nuxt",
+  "displayName": "Cypress Nuxt",
   "version": "1.0.1",
   "description": "Cypress plugin for nuxt.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NickBolles/cypress-nuxt"
+  },
   "main": "index.js",
   "types": "index.d.ts",
   "files": [

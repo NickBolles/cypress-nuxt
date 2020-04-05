@@ -1,6 +1,6 @@
 {
   "name": "cypress-nuxt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cypress plugin for nuxt.js",
   "main": "index.js",
   "types": "index.d.ts",

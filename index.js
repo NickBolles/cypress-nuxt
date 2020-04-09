@@ -2,7 +2,7 @@ const wp = require("@cypress/webpack-preprocessor");
 const nuxt = require("nuxt");
 
 function cypressNuxt(opts) {
-    return nuxt.getWebpackConfig(opts ? opts.loadOptions : undefined)
+    return nuxt.getWebpackConfig('client', opts ? opts.loadOptions : undefined)
                 .then((nuxtWebpackConfig) => {
                     if (opts && opts.transform) {
                         return opts.transform(nuxtWebpackConfig);

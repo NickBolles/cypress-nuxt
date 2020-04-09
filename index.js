@@ -2,7 +2,7 @@ const wp = require("@cypress/webpack-preprocessor");
 const nuxt = require("nuxt");
 
 function cypressNuxt(opts) {
-    return nuxt.getWebpackConfig()
+    return nuxt.getWebpackConfig(opts ? opts.loadOptions : undefined)
                 .then((nuxtWebpackConfig) => {
                     if (opts && opts.transform) {
                         return opts.transform(nuxtWebpackConfig);
@@ -14,7 +14,6 @@ function cypressNuxt(opts) {
                     * It appears that chunking breaks cypress unit tests:
                     * https://github.com/cypress-io/cypress-webpack-preprocessor/issues/31
                     */
-                    // todo: research other chunking options
                     delete transformedConfig.optimization.runtimeChunk
                     delete transformedConfig.optimization.splitChunks
                     /**

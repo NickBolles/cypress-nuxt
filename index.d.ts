@@ -1,5 +1,6 @@
 
 // todo: use Nuxt's actual load Options Type when there is one
+// initial options from feature PR: https://github.com/nuxt/nuxt.js/pull/6868
 interface LoadOptions {
     rootDir: string;
     for: NuxtTarget;

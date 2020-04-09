@@ -96,6 +96,23 @@ function filePreprocessor() {
 }
 ```
 
+## Options
+the plugin function takes an options object. See the type definitions for [LoadOptions](index.d.ts#L3) for valid options. 
+
+### rootDir
+Set the root dir to search for the nuxt.config.[js|ts] This is useful if you don't run cypress from the directory that contains your nuxt config file.
+
+to resolve `app/client/nuxt.config.js` from `app/e2e/cypress/plugin.js`
+```js
+  return cypressNuxt.plugin({
+    loadOptions: {
+      rootDir: path.join(__dirname, "../../client")
+    }
+  })
+```
+
+### "for"
+This option tells nuxt what version of the webpack config you want. Leaving this undefined seems to work fine.
 
 ## Write a test
 ### Javascript

@@ -1,4 +1,14 @@
 import {CypressWebpackPreProcessor} from '@cypress/webpack-preprocessor';
+
+// todo: use Nuxt's actual load Options Type when there is one
+// initial options from feature PR: https://github.com/nuxt/nuxt.js/pull/6868
+interface LoadOptions {
+    rootDir: string;
+    for: NuxtTarget;
+}
+// source: https://github.com/nuxt/nuxt.js/blob/dev/packages/core/src/load.js#L4
+type NuxtTarget = "dry" | "dev" | "build" | "start"
+
 /**
  * Options for Cypress-nuxt
  */
@@ -10,6 +20,7 @@ interface Options {
      * @returns actual webpack config to use
      */
     transform(webpackConfig: CypressWebpackPreProcessor.Options): Promise<CypressWebpackPreProcessor.Options> | CypressWebpackPreProcessor.Options;
+    loadOptions: LoadOptions
 }
 
 /**

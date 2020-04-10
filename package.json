@@ -17,7 +17,7 @@
   "author": "Nick Bolles <me@nickbolles.com>",
   "license": "MIT",
   "dependencies": {
-    "@cypress/webpack-preprocessor": "^4.1.3"
+    "@cypress/webpack-preprocessor": "^5.1.1"
   },
   "peerDependencies": {
     "nuxt": ">=2.12.0"

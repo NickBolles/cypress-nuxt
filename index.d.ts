@@ -19,7 +19,7 @@ interface Options {
      * @param webpackConfig The original configuration that nuxt returned
      * @returns actual webpack config to use
      */
-    transform(webpackConfig: CypressWebpackPreProcessor.Options): Promise<CypressWebpackPreProcessor.Options> | CypressWebpackPreProcessor.Options;
+    transform(webpackConfig: import("webpack").Configuration): Promise<import("webpack").Configuration> | import("webpack").Configuration;
     loadOptions: LoadOptions
 }
 

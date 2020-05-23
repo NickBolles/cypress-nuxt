@@ -1,4 +1,4 @@
-import {CypressWebpackPreProcessor} from '@cypress/webpack-preprocessor';
+import {WebpackPreprocessor} from '@cypress/webpack-preprocessor';
 
 // todo: use Nuxt's actual load Options Type when there is one
 // initial options from feature PR: https://github.com/nuxt/nuxt.js/pull/6868
@@ -30,4 +30,4 @@ interface Options {
  * @param opts Options for the plugin
  * @returns - Promise that resolves in a file pre-processor (from `@cypress/webpack-preprocessor`) that can be used in `on("file:preprocessor")` calls
  */
-export function plugin(opts?: Options): Promise<CypressWebpackPreProcessor.FilePreprocessor>;
+export function plugin(opts?: Options): Promise<WebpackPreprocessor.FilePreprocessor>;

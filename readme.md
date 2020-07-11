@@ -1,10 +1,10 @@
 # Cypress-nuxt
 Utilities for using Cypress with Nuxt Apps.
 
-Current features:
+#### Current features:
 - Expose a plugin for unit testing components (automatically generates the webpack config)
 
-Potential future features:
+#### Potential future features:
 - Provide commands for interacting with Nuxt
 - Setup nuxt URL automatically
 - Have other ideas? Make an issue with your idea, I'd love to hear them!

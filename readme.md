@@ -21,14 +21,16 @@ First, this requires Nuxt >2.12. This module doesn't rely on nuxt itself so you 
 
 ## Install
 `npm install -D cypress-nuxt cypress-vue-unit-test`
+
 or with yarn
+
 `yarn add -D cypress-nuxt cypress-vue-unit-test`
 
 
 ## Add the cypress plugin
 
 #### With Async/Await
-You might want to check that your node.js version [supports async await](https://node.green/#ES2017-features-async-functions). If it doesn't... well first upgrade. :p but if not use promises below.
+> You might want to check that your node.js version [supports async await](https://node.green/#ES2017-features-async-functions). If it doesn't... well first upgrade. :p but if not use promises below.
 
 `cypress/plugins/index.js`
 ```javascript
@@ -42,7 +44,7 @@ module.exports = async (on, config) => { // make sure to include "async"!
 };
 ```
 
-#### With Promises
+#### or With Promises
 
 `cypress/plugins/index.js`
 ```javascript
@@ -60,9 +62,11 @@ module.exports = function (on, config) {
 ```
 
 
-### @nuxt/typescript-runtime
+### `@nuxt/typescript-runtime`
+> [`@nuxt/typescript-runtime`](https://typescript.nuxtjs.org/guide/runtime.html#usage) allows writing your `nuxt.config` file in `typescript`, this means that cypress-nuxt (and anything else reading your `nuxt.config.ts` needs to compile it before it can work with it.
 
 in your `cypress/plugins/index.js` add a ts-node register call before getting the webpack config.
+
 ```javascript
 require("ts-node").register({
     compilerOptions: {
@@ -79,7 +83,7 @@ cypressNuxt.plugin({})
 
 ```
 
-#### With Async/Await
+#### Or, With Async/Await
 I like to pull it out to a function so it's easy to `await`
 `cypress/plugins/index.js`
 ```javascript
@@ -103,25 +107,6 @@ function filePreprocessor() {
   return cypressNuxt.plugin({})
 }
 ```
-
-## Options
-the plugin function takes an options object. See the type definitions for [LoadOptions](index.d.ts#L3) for valid options. 
-
-### rootDir
-Set the root dir to search for the nuxt.config.[js|ts] This is useful if you don't run cypress from the directory that contains your nuxt config file.
-
-to resolve `app/client/nuxt.config.js` from `app/e2e/cypress/plugin.js`
-```js
-  return cypressNuxt.plugin({
-    loadOptions: {
-      rootDir: path.join(__dirname, "../../client")
-    }
-  })
-```
-
-### "for"
-This option tells nuxt what version of the webpack config you want. Leaving this undefined seems to work fine.
-
 
 ## Setup `Cypress-vue-unit-test`
  > For cypress-vue-unit-test < v2 see [oldTestOrganization.md](./oldTestOrganization.md)
@@ -154,3 +139,25 @@ describe("Logo", () => {
 
 ### Typescript Tests (if you have [@nuxt/typescript-build](https://typescript.nuxtjs.org/guide/setup.html) enabled)
 Just rename your spec file to `.ts`: `~/components/Logo.spec.ts`
+
+
+
+## Options
+the plugin function takes an options object. See the type definitions for [LoadOptions](index.d.ts#L3) for valid options. 
+
+### rootDir
+Set the root dir to search for the nuxt.config.[js|ts] This is useful if you don't run cypress from the directory that contains your nuxt config file.
+
+to resolve `app/client/nuxt.config.js` from `app/e2e/cypress/plugin.js`
+```js
+  return cypressNuxt.plugin({
+    loadOptions: {
+      rootDir: path.join(__dirname, "../../client")
+    }
+  })
+```
+
+### "for"
+This option tells nuxt what version of the webpack config you want. Leaving this undefined seems to work fine.
+
+

@@ -1,5 +1,13 @@
 # Cypress-nuxt
-Use Cypress for all of your component unit tests.
+Utilities for using Cypress with Nuxt Apps.
+
+Current features:
+- Expose a plugin for unit testing components (automatically generates the webpack config)
+
+Potential future features:
+- Provide commands for interacting with Nuxt
+- Setup nuxt URL automatically
+- Have other ideas? Make an issue with your idea, I'd love to hear them!
 
 ### Why though?
 First off, cypress is awesome. Second, there's a bit of wiring up needed when using nuxt. Although this was made way easier with Nuxt [exposing the webpack config](https://github.com/nuxt/nuxt.js/pull/7029), we still need to tweak the config a tiny bit to get it to work with cypress. 
@@ -114,17 +122,23 @@ to resolve `app/client/nuxt.config.js` from `app/e2e/cypress/plugin.js`
 ### "for"
 This option tells nuxt what version of the webpack config you want. Leaving this undefined seems to work fine.
 
+
+## Setup `Cypress-vue-unit-test`
+ > For cypress-vue-unit-test < v2 see [oldTestOrganization.md](./oldTestOrganization.md)
+ 
+Follow the [`cypress-vue-unit-test` documentation](https://github.com/bahmutov/cypress-vue-unit-test) to get setup
+
 ## Write a test
 ### Javascript
 
 `~/components/Logo.spec.js`
 ```javascript
 import { createWrapper } from "@vue/test-utils";
-import mountVue from "cypress-vue-unit-test";
+import { mountCallback } from "cypress-vue-unit-test";
 import Logo from "~/components/Logo.vue";
 
 describe("Logo", () => {
-  beforeEach(mountVue(Logo));
+  beforeEach(mountCallback(Logo));
 
   it("should initialize", () => {
     cy.wrap(Cypress.vue)
@@ -140,85 +154,3 @@ describe("Logo", () => {
 
 ### Typescript Tests (if you have [@nuxt/typescript-build](https://typescript.nuxtjs.org/guide/setup.html) enabled)
 Just rename your spec file to `.ts`: `~/components/Logo.spec.ts`
-
-
-
-## Test organization
-### Component Tests
-There's currently a work in progress "component tests" feature. [Pull Request](https://github.com/cypress-io/cypress/pull/5923). This will make organizing E2E vs component tests much more intuitive.
-
-### For now
-There are two potential methods, which essentially ignore `**/*/e2e/**/*` (`ignoreTestFiles=**/*/e2e/**/*`) for unit tests, and for e2e ignore anything outside of `**/*/e2e/**/*` (`ignoreTestFiles=!**/*/e2e/**/*`)
-
-##### Directory structure
-```
-/
-  /cypress/
-    plugins/
-       index.js
-    fixtures/
-    support/
-    e2e/
-      testFile.e2e-spec.ts
-  /components
-    Logo.vue
-    Logo.spec.ts
-  /pages
-    index.vue
-  package.json
-  cypress.json  
-```
-
-### Different config files
-You could also use two different cypress [config files](https://docs.cypress.io/guides/guides/command-line.html#cypress-run)
-
-
-#### `packages.json`
-```json
-{
-  "scripts": {
-    "cy:run": "cypress run",
-    "cy:open": "cypress open",
-    "cy:run:e2e": "cypress run --config-file cypress.e2e.json",
-    "cy:run:unit": "cypress run --config-file cypress.unit.json"
-  }
-}
-```
-#### `cypress.e2e.json`
-```json
-{
-  "$schema": "https://raw.githubusercontent.com/cypress-io/cypress/develop/cli/schema/cypress.schema.json",
-  "integrationFolder": "./cypress/e2e",
-  "testFiles": "**/*.*spec.*",
-}
-```
-#### `cypress.unit.json`
-```json
-{
-  "$schema": "https://raw.githubusercontent.com/cypress-io/cypress/develop/cli/schema/cypress.schema.json",
-  "integrationFolder": "./components",
-  "testFiles": "**/*.*spec.*",
-}
-```
-
-### Scripts with Ignore patterns
-
-#### `packages.json`
-```json
-{
-  "scripts": {
-    "cy:run": "cypress run",
-    "cy:open": "cypress open",
-    "cy:run:e2e": "cypress run --config ignoreTestFiles=!**/*/e2e/**/*",
-    "cy:run:unit": "cypress run -c ignoreTestFiles=**/*/e2e/**/*"
-  }
-}
-```
-#### `cypress.json`
-```json
-{
-  "$schema": "https://raw.githubusercontent.com/cypress-io/cypress/develop/cli/schema/cypress.schema.json",
-  "integrationFolder": "./",
-  "testFiles": "**/*.*spec.*",
-}
-```

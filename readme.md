@@ -16,10 +16,10 @@ There also might be other utilities needed in the future to make cypress even ea
 
 # Getting started
 
-## Nuxt version
-First, this requires Nuxt >2.12. This module doesn't rely on nuxt itself so you need to install it (although it's a nuxt app... if you don't have it installed what are you doing?). If you're not on > 2.12 [upgrade nuxt](https://nuxtjs.org/guide/upgrading)
+> ### Nuxt version
+> First, this requires Nuxt >2.12. This module doesn't rely on nuxt itself so you need to install it (although it's a nuxt app... if you don't have it installed what are you doing?). If you're not on > 2.12 [upgrade nuxt](https://nuxtjs.org/guide/upgrading)
 
-## Install
+## 1. Install
 `npm install -D cypress-nuxt cypress-vue-unit-test`
 
 or with yarn
@@ -27,7 +27,7 @@ or with yarn
 `yarn add -D cypress-nuxt cypress-vue-unit-test`
 
 
-## Add the cypress plugin
+## 2. Add the cypress plugin
 
 #### With Async/Await
 > You might want to check that your node.js version [supports async await](https://node.green/#ES2017-features-async-functions). If it doesn't... well first upgrade. :p but if not use promises below.
@@ -62,7 +62,7 @@ module.exports = function (on, config) {
 ```
 
 
-### `@nuxt/typescript-runtime`
+### 2.b `@nuxt/typescript-runtime`
 > [`@nuxt/typescript-runtime`](https://typescript.nuxtjs.org/guide/runtime.html#usage) allows writing your `nuxt.config` file in `typescript`, this means that cypress-nuxt (and anything else reading your `nuxt.config.ts` needs to compile it before it can work with it.
 
 in your `cypress/plugins/index.js` add a ts-node register call before getting the webpack config.
@@ -108,12 +108,12 @@ function filePreprocessor() {
 }
 ```
 
-## Setup `Cypress-vue-unit-test`
+## 3. Setup `Cypress-vue-unit-test`
  > For cypress-vue-unit-test < v2 see [oldTestOrganization.md](./oldTestOrganization.md)
  
 Follow the [`cypress-vue-unit-test` documentation](https://github.com/bahmutov/cypress-vue-unit-test) to get setup
 
-## Write a test
+## 4. Write a test
 ### Javascript
 
 `~/components/Logo.spec.js`
@@ -142,7 +142,7 @@ Just rename your spec file to `.ts`: `~/components/Logo.spec.ts`
 
 
 
-## Options
+# Options
 the plugin function takes an options object. See the type definitions for [LoadOptions](index.d.ts#L3) for valid options. 
 
 ### rootDir
